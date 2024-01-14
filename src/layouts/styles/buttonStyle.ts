@@ -53,6 +53,7 @@ export const createVariantStyle = (variant: ButtonVariant, color: string) => {
   switch (variant) {
     case 'ghost':
       return css`
+        min-width: 24px;
         width: auto;
         height: auto;
         padding: 0;

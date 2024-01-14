@@ -29,10 +29,14 @@ export const Button = ({
   const sizeStyle = createButtonSizeStyle(size);
 
   return (
-    <button type="button" css={[baseStyle, variantStyle, sizeStyle]} {...buttonProps}>
-      <Text align="center" size={size}>
-        {children}
-      </Text>
+    <button type="button" css={[baseStyle, sizeStyle, variantStyle]} {...buttonProps}>
+      {variant === 'ghost' ? (
+        children
+      ) : (
+        <Text colorScheme={colorScheme} size={size}>
+          {children}
+        </Text>
+      )}
     </button>
   );
 };
