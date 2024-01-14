@@ -15,9 +15,18 @@
     "incremental": true,
     "paths": {
       "@/*": ["./src/*"],
-      "@dto/*": ["./dto/*"]
-    }
+      "@dto/*": ["./dto/*"],
+      "@app/*": ["./src/app*"],
+      "@product/*": ["./src/product*"],
+      "@shared/*": ["./src/shared*"],
+      "@libs/*": ["./src/libs*"]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }
