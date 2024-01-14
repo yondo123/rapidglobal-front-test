@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { Text } from '@layouts/components/Text';
-import { MOCK_TEXT_SIZE, MOCK_TEXT_BOLD, MOCK_TEXT_DECORATION, MOCK_TEXT_ALIGN } from '@mocks/constants/TextMocks';
+import { MOCK_TEXT_SIZE, MOCK_TEXT_BOLD, MOCK_TEXT_DECORATION, MOCK_TEXT_ALIGN } from '@mocks/constants/LayoutsMocks';
 
 describe('Text UI 컴포넌트 테스트', () => {
   it('Text에 포함된 텍스트와 함께 Text가 렌더링된다.', () => {
