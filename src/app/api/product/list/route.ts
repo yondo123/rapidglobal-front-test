@@ -3,10 +3,23 @@ import dayjs from 'dayjs';
 import { readFileSync } from 'fs';
 import { NextRequest, NextResponse } from 'next/server';
 
-//http://localhost:3000/api/product/list?skip=0&take=10&sortList=[{%22price%22:%22desc%22}]
+function sortByPrice(a: Product, b: Product) {
+  return b.price - a.price;
+}
+
+function sortByTitle(a: Product, b: Product) {
+  return b.title.localeCompare(a.title);
+}
+
+function sortByUploadedAt(a: Product, b: Product) {
+  return dayjs(b.uploadedAt).diff(dayjs(a.uploadedAt), 'days');
+}
+function sortByViewCount(a: Product, b: Product) {
+  return b.viewCount - a.viewCount;
+}
 
 export async function GET(req: NextRequest) {
-  const searchParams = req.nextUrl.searchParams;
+  const { searchParams } = req.nextUrl;
 
   const skipQuery = searchParams.get('skip') || '0';
   const takeQuery = searchParams.get('take') || '10';
@@ -62,19 +75,4 @@ export async function GET(req: NextRequest) {
       }
     );
   }
-}
-
-function sortByPrice(a: Product, b: Product) {
-  return b.price - a.price;
-}
-
-function sortByTitle(a: Product, b: Product) {
-  return b.title.localeCompare(a.title);
-}
-
-function sortByUploadedAt(a: Product, b: Product) {
-  return dayjs(b.uploadedAt).diff(dayjs(a.uploadedAt), 'days');
-}
-function sortByViewCount(a: Product, b: Product) {
-  return b.viewCount - a.viewCount;
 }

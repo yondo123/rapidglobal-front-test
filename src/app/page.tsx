@@ -1,5 +1,3 @@
-const HomePage = () => {
-  return <div>hompepage</div>;
-};
+const HomePage = () => <div>hompepage</div>;
 
 export default HomePage;
