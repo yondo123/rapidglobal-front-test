@@ -13,13 +13,15 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
       "@dto/*": ["./dto/*"],
-      "@app/*": ["./src/app*"],
-      "@product/*": ["./src/product*"],
-      "@shared/*": ["./src/shared*"],
-      "@libs/*": ["./src/libs*"]
+      "@app/*": ["./src/app/*"],
+      "@layouts/*": ["./src/layouts/*"],
+      "@product/*": ["./src/product/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@libs/*": ["./src/libs/*"]
     },
     "plugins": [
       {

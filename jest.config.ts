@@ -25,7 +25,8 @@ const config: Config = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
     '^@app/(.*)$': '<rootDir>/src/app/$1',
-    '^@product/(.*)$': '<rootDir>/src/product/$1'
+    '^@product/(.*)$': '<rootDir>/src/product/$1',
+    '^@layouts/(.*)$': '<rootDir>/src/layouts/$1'
   }
 };
 
