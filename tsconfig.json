@@ -12,6 +12,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "jsxImportSource": "@emotion/react",
     "incremental": true,
     "baseUrl": ".",
     "paths": {
@@ -21,7 +22,8 @@
       "@layouts/*": ["./src/layouts/*"],
       "@product/*": ["./src/product/*"],
       "@shared/*": ["./src/shared/*"],
-      "@libs/*": ["./src/libs/*"]
+      "@libs/*": ["./src/libs/*"],
+      "@mocks/*": ["./src/mocks/*"]
     },
     "plugins": [
       {
