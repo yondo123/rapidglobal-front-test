@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { getColorFromColorScheme, getInvertColor } from '../utils/colorHelpers';
+import { getColorFromColorScheme, getInvertColor, convertHexToRgba } from '../utils/colorHelpers';
 import type { ColorScheme, TableVariants } from '../types';
 
 export const TableContainer = styled.div`
@@ -62,6 +62,9 @@ export const createTableStyle = (color: ColorScheme, variant: TableVariants) => 
     thead {
       color: ${getColorFromColorScheme(color)};
       border-bottom: 1px solid ${getColorFromColorScheme(color)};
+    }
+    tbody tr:hover {
+      background-color: ${convertHexToRgba(getColorFromColorScheme(color), 0.3)};
     }
     tr:not(:last-child) {
       th,
