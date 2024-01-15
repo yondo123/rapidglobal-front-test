@@ -26,3 +26,8 @@ export type RequestProductsParams = {
   take: number;
   sortList?: SortList;
 };
+
+export type ResponseProducts = {
+  products: Product[];
+  totalCount: number;
+};

@@ -64,9 +64,12 @@ export async function GET(req: NextRequest) {
       })
       .slice(skip, skip + take);
 
-    return NextResponse.json(sortProductList, {
-      status: 200
-    });
+    return NextResponse.json(
+      { products: sortProductList, totalCount: productList.length },
+      {
+        status: 200
+      }
+    );
   } catch (error) {
     return NextResponse.json(
       { message: `Internal Server Error ${error}` },
