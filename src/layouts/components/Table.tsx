@@ -45,12 +45,20 @@ interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
   align?: 'left' | 'center' | 'right';
 }
 
-export const Table = ({ colorScheme = 'primary', variant = 'simple', align = 'left', children }: TableProps) => {
+export const Table = ({
+  colorScheme = 'primary',
+  variant = 'simple',
+  align = 'left',
+  children,
+  ...tableProps
+}: TableProps) => {
   const tableStyle = createTableStyle(colorScheme, variant);
   const tableAlignStyle = createTableTextAlignStyle(align);
   return (
     <TableContainer>
-      <table css={[tableStyle, tableAlignStyle]}>{children}</table>
+      <table css={[tableStyle, tableAlignStyle]} {...tableProps}>
+        {children}
+      </table>
     </TableContainer>
   );
 };
