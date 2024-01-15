@@ -33,7 +33,7 @@ export const Button = ({
       {variant === 'ghost' ? (
         children
       ) : (
-        <Text colorScheme={colorScheme} size={size}>
+        <Text colorScheme={colorScheme} size={size} align="center">
           {children}
         </Text>
       )}
