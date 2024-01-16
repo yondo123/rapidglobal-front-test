@@ -28,7 +28,7 @@ const baseTableStyle = css`
   th,
   td {
     padding: 8px 16px;
-    height: 32px;
+    height: 40px;
   }
 `;
 

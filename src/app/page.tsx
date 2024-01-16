@@ -9,7 +9,7 @@ interface ServerPageProps {
 }
 
 const HomePage = async ({ searchParams }: ServerPageProps) => {
-  const currentPage = Number(searchParams.page) ?? 1;
+  const currentPage = searchParams.page ? Number(searchParams.page) : 1;
   return (
     <>
       <ProductListHeader />
