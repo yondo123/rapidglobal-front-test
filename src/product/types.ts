@@ -21,6 +21,11 @@ export type ProductSort = {
   uploadedAtSort: SortAction;
 };
 
+export type RequestProductUpdateParams = {
+  id: number;
+  title: string;
+};
+
 export type RequestProductsParams = {
   skip: number;
   take: number;

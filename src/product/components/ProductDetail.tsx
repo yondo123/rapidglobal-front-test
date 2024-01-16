@@ -1,15 +1,18 @@
 'use client';
 
+import { useState } from 'react';
 import styled from '@emotion/styled';
-import { Heading, Text, Stack } from '@layouts/components';
+import { Heading, Text, Stack, Button } from '@layouts/components';
 import { formatCommaNumber } from '@shared/utils/number';
 import { ImageZoom } from '@shared/components/ImageZoom';
+import { ProductEdit } from './ProductEdit';
 import { Product } from '../types';
 
 interface ProductDetailProps {
   product: Product | null;
 }
 export const ProductDetail = ({ product }: ProductDetailProps) => {
+  const [editMode, setEditMode] = useState<boolean>(false);
   const thumbnails = product?.thumbnailUrls;
 
   if (!product) {
@@ -25,9 +28,18 @@ export const ProductDetail = ({ product }: ProductDetailProps) => {
 
   return (
     <ProductDetailContainer>
-      <Heading size="lg" colorScheme="tertiary">
-        {product?.title}
-      </Heading>
+      {editMode ? (
+        <ProductEdit product={product} />
+      ) : (
+        <Stack direction="horizontal" justify="between" spacing={8}>
+          <Heading size="lg" colorScheme="tertiary">
+            {product?.title}
+          </Heading>
+          <Button variant="outline" colorScheme="info" size="sm" onClick={() => setEditMode(true)}>
+            제목 수정
+          </Button>
+        </Stack>
+      )}
       <Stack direction="horizontal" justify="start" spacing={8} style={{ marginTop: '8px' }}>
         <Text colorScheme="tertiary">상품 번호</Text>
         <Text size="sm" colorScheme="label">
@@ -42,7 +54,7 @@ export const ProductDetail = ({ product }: ProductDetailProps) => {
       </Stack>
       <ProductThumbnail>
         {thumbnails?.map((url) => (
-          <ImageZoom src={url} alt={product.title} width={200} height={200} />
+          <ImageZoom key={url} src={url} alt={product.title} width={200} height={200} />
         ))}
       </ProductThumbnail>
     </ProductDetailContainer>
