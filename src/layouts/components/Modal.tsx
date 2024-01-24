@@ -3,8 +3,9 @@
 import { useRef } from 'react';
 import { createPortal } from 'react-dom';
 import styled from '@emotion/styled';
-import { Button, Stack } from '@layouts/components';
 import { useOutsideClick } from '@shared/hooks/useOutsideClick';
+import { Button } from './Button';
+import { Stack } from './Stack';
 
 interface ModalProps {
   children: React.ReactNode;
