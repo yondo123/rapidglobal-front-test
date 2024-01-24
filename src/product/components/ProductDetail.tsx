@@ -13,6 +13,7 @@ interface ProductDetailProps {
 }
 export const ProductDetail = ({ product }: ProductDetailProps) => {
   const [editMode, setEditMode] = useState<boolean>(false);
+  const [productTitle, setProductTitle] = useState<string | null>(product?.title ?? null);
   const thumbnails = product?.thumbnailUrls;
 
   if (!product) {
@@ -29,11 +30,19 @@ export const ProductDetail = ({ product }: ProductDetailProps) => {
   return (
     <ProductDetailContainer>
       {editMode ? (
-        <ProductEdit product={product} />
+        <ProductEdit
+          product={{ ...product, title: productTitle ?? product.title }}
+          handleEdit={(title) => {
+            setEditMode(false);
+            if (title) {
+              setProductTitle(title);
+            }
+          }}
+        />
       ) : (
         <Stack direction="horizontal" justify="between" spacing={8}>
           <Heading size="lg" colorScheme="tertiary">
-            {product?.title}
+            {productTitle}
           </Heading>
           <Button variant="outline" colorScheme="info" size="sm" onClick={() => setEditMode(true)}>
             제목 수정
@@ -54,7 +63,7 @@ export const ProductDetail = ({ product }: ProductDetailProps) => {
       </Stack>
       <ProductThumbnail>
         {thumbnails?.map((url) => (
-          <ImageZoom key={url} src={url} alt={product.title} width={200} height={200} />
+          <ImageZoom key={url} src={url} alt={productTitle ?? 'product'} width={200} height={200} />
         ))}
       </ProductThumbnail>
     </ProductDetailContainer>

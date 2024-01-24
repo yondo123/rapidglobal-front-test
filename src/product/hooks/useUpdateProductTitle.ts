@@ -5,8 +5,9 @@ import type { RequestProductUpdateParams } from '../api/models/product';
 
 export const useUpdateProductTitle = (
   params: RequestProductUpdateParams,
-  options?: MutateOptions,
-  onSuccess?: () => void
+  handleSuccess?: () => void | null,
+  handleError?: (error: Error) => void | null,
+  options?: MutateOptions
 ) => {
   const queryClient = useQueryClient();
   const { mutate, isPending } = useMutation({
@@ -15,7 +16,10 @@ export const useUpdateProductTitle = (
       queryClient.invalidateQueries({
         queryKey: ['products']
       });
-      onSuccess?.();
+      handleSuccess?.();
+    },
+    onError: (error) => {
+      handleError?.(error);
     },
     ...options
   });

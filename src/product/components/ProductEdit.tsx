@@ -7,22 +7,29 @@ import type { Product } from '../types';
 
 interface ProductEditProps {
   product: Product;
+  handleEdit: (titleName?: string) => void;
 }
-export const ProductEdit = ({ product }: ProductEditProps) => {
+export const ProductEdit = ({ product, handleEdit }: ProductEditProps) => {
   const [productTitle, setProductTitle] = useState<string>(product.title);
   const [stateMessage, setStateMessage] = useState<string | null>(null);
-  const { mutate: updateProductTitle, isPending } = useUpdateProductTitle({
-    id: product.id,
-    title: productTitle
-  });
+  const successSaveAction = () => {
+    setStateMessage('성공적으로 상품 제목을 변경했습니다.');
+    handleEdit(productTitle);
+  };
+  const { mutate: updateProductTitle, isPending } = useUpdateProductTitle(
+    {
+      id: product.id,
+      title: productTitle
+    },
+    successSaveAction
+  );
 
   const handleSaveProductTitle = () => {
-    if (!productTitle) {
+    if (!productTitle.trim()) {
       setStateMessage('상품 제목을 입력해주세요.');
       return;
     }
     updateProductTitle();
-    setStateMessage('성공적으로 상품 제목을 변경했습니다.');
   };
   return (
     <div>
@@ -38,9 +45,12 @@ export const ProductEdit = ({ product }: ProductEditProps) => {
         <Button colorScheme="accent" size="sm" variant="outline" onClick={handleSaveProductTitle} disabled={isPending}>
           저장
         </Button>
+        <Button colorScheme="tertiary" size="sm" variant="outline" onClick={() => handleEdit()} disabled={isPending}>
+          취소
+        </Button>
       </Stack>
       {stateMessage && (
-        <Text colorScheme="info" style={{ marginTop: '8px' }}>
+        <Text colorScheme="warning" style={{ marginTop: '8px' }}>
           {stateMessage}
         </Text>
       )}
