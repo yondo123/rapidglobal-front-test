@@ -20,7 +20,7 @@ export const AppRouterContextProviderMock = ({
       prefetch: jest.fn(),
       ...router
     }),
-    []
+    [router]
   );
   return <AppRouterContext.Provider value={mockedRouter}>{children}</AppRouterContext.Provider>;
 };
