@@ -35,25 +35,26 @@ describe('상품 페이지네이션 컴포넌트 테스트', () => {
 
   it('"이전" 버튼을 클릭하면 이전 페이지로 이동한다.', async () => {
     const push = jest.fn();
-    renderComponent({ push, hasNext: true, currentPage: 10 });
+    const currentPage = 10;
+    renderComponent({ push, hasNext: true, currentPage });
     const $prevButton = screen.getByRole('button', { name: '이전' });
     await userEvent.click($prevButton);
-    expect(push).toHaveBeenCalledTimes(1);
+    expect(push).toHaveBeenCalledWith(`/?page=${currentPage - 1}`);
   });
 
-  it('"다음" 버튼을 클릭하면 이전 페이지로 이동한다.', async () => {
+  it('"다음" 버튼을 클릭하면 다음 페이지로 이동한다.', async () => {
     const push = jest.fn();
-    renderComponent({ push, hasNext: true, currentPage: 10 });
+    const currentPage = 10;
+    renderComponent({ push, hasNext: true, currentPage });
     const $nextButton = screen.getByRole('button', { name: '다음' });
     await userEvent.click($nextButton);
-    expect(push).toHaveBeenCalledTimes(1);
+    expect(push).toHaveBeenCalledWith(`/?page=${currentPage + 1}`);
   });
 
   it('마지막 페이지라면 "다음" 버튼이 비활성화된다.', async () => {
     const push = jest.fn();
     renderComponent({ push, hasNext: false, currentPage: 10 });
     const $nextButton = screen.getByRole('button', { name: '다음' });
-    await userEvent.click($nextButton);
-    expect(push).toHaveBeenCalledTimes(0);
+    expect($nextButton).toBeDisabled();
   });
 });
