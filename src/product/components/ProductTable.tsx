@@ -2,6 +2,7 @@
 
 import { Button, Table, Text, Modal } from '@layouts/components';
 import { formatDateYYYYMMDD, formatCommaNumber } from '@shared/utils';
+import { ClientPortal } from '@shared/components/ClientPortal';
 import { useState } from 'react';
 import { useProductSort } from '../hooks/useProductSort';
 import { ProductDetail } from './ProductDetail';
@@ -35,9 +36,11 @@ export const ProductTable = ({ currentPage }: ProductTableProps) => {
 
   return (
     <>
-      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
-        <ProductDetail product={selectedProduct} />
-      </Modal>
+      <ClientPortal>
+        <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
+          <ProductDetail product={selectedProduct} />
+        </Modal>
+      </ClientPortal>
       <Table>
         <ProductTableHeader />
         <Table.Body>
