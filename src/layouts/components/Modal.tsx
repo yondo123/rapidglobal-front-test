@@ -3,8 +3,10 @@
 import { useRef } from 'react';
 import styled from '@emotion/styled';
 import { useOutsideClick } from '@shared/hooks';
+import { Portal } from './Portal';
 import { Button } from './Button';
 import { Stack } from './Stack';
+import { ModalProvider } from '../contexts/ModalContext';
 
 interface ModalProps {
   children: React.ReactNode;
@@ -26,16 +28,18 @@ export const Modal = ({ children, isOpen, onClose }: ModalProps) => {
   }
 
   return (
-    <ModalOverlay role="none">
-      <ModalContainer ref={modalRef} role="dialog" aria-modal>
-        <Stack justify="between" style={{ height: '100%', padding: '16px' }}>
-          {children}
-          <Button colorScheme="info" onClick={onClose}>
-            닫기
-          </Button>
-        </Stack>
-      </ModalContainer>
-    </ModalOverlay>
+    <Portal id="root-modal">
+      <ModalOverlay role="none">
+        <ModalContainer ref={modalRef} role="dialog" aria-modal>
+          <Stack justify="between" style={{ height: '100%', padding: '16px' }}>
+            {children}
+            <Button colorScheme="info" onClick={onClose}>
+              닫기
+            </Button>
+          </Stack>
+        </ModalContainer>
+      </ModalOverlay>
+    </Portal>
   );
 };
 
