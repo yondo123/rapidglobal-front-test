@@ -2,7 +2,7 @@ import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import type { UseSuspenseInfiniteQueryOptions, InfiniteData } from '@tanstack/react-query';
 import { getProducts } from '../api/getProducts';
 import { PRODUCT_TABLE_VIEW_COUNT } from '../constants';
-import type { RequestProductsParams, ResponseProducts } from '../types';
+import type { RequestProductsParams, ResponseProducts } from '../api/models/product';
 
 export const useGetProducts = (params: RequestProductsParams, options?: UseSuspenseInfiniteQueryOptions) => {
   const { data, hasNextPage } = useSuspenseInfiniteQuery<ResponseProducts, Error>({

@@ -1,10 +1,12 @@
 'use client';
 
 import { useRef } from 'react';
-import { createPortal } from 'react-dom';
 import styled from '@emotion/styled';
-import { Button, Stack } from '@layouts/components';
-import { useOutsideClick } from '@shared/hooks/useOutsideClick';
+import { useOutsideClick } from '@shared/hooks';
+import { Portal } from './Portal';
+import { Button } from './Button';
+import { Stack } from './Stack';
+import { ModalProvider } from '../contexts/ModalContext';
 
 interface ModalProps {
   children: React.ReactNode;
@@ -25,22 +27,23 @@ export const Modal = ({ children, isOpen, onClose }: ModalProps) => {
     return null;
   }
 
-  return createPortal(
-    <ModalContainer role="dialog">
-      <ModalContent ref={modalRef}>
-        <Stack justify="between" style={{ height: '100%', padding: '16px' }}>
-          {children}
-          <Button colorScheme="info" onClick={onClose}>
-            닫기
-          </Button>
-        </Stack>
-      </ModalContent>
-    </ModalContainer>,
-    document.getElementById('root-modal') as HTMLElement
+  return (
+    <Portal id="root-modal">
+      <ModalOverlay role="none">
+        <ModalContainer ref={modalRef} role="dialog" aria-modal>
+          <Stack justify="between" style={{ height: '100%', padding: '16px' }}>
+            {children}
+            <Button colorScheme="info" onClick={onClose}>
+              닫기
+            </Button>
+          </Stack>
+        </ModalContainer>
+      </ModalOverlay>
+    </Portal>
   );
 };
 
-const ModalContainer = styled.div`
+const ModalOverlay = styled.div`
   width: 100vw;
   height: 100%;
   position: fixed;
@@ -51,7 +54,7 @@ const ModalContainer = styled.div`
   z-index: 900;
 `;
 
-const ModalContent = styled.div`
+const ModalContainer = styled.div`
   max-width: 720px;
   position: absolute;
   top: 50%;

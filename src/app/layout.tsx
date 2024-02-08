@@ -15,7 +15,6 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
       <body>
         <QueryProvider>
           <RootContainer>{children}</RootContainer>
-          <div id="root-modal" />
         </QueryProvider>
       </body>
     </EmotionProvider>

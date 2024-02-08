@@ -1,6 +1,6 @@
 'use client';
 
-import { CSSProperties, useRef, useState } from 'react';
+import { CSSProperties, useRef, useState, memo } from 'react';
 import Image from 'next/image';
 import type { ImageProps } from 'next/image';
 import { Hidden } from '@layouts/mixins/Hidden';
@@ -11,7 +11,7 @@ interface ZoomProps {
   animationDuration?: number;
 }
 
-export const ImageZoom = (props: ImageProps & ZoomProps) => {
+export const ImageZoom = memo((props: ImageProps & ZoomProps) => {
   const { scale = 1, animationDuration = 300, ...imageProps } = props;
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -71,4 +71,4 @@ export const ImageZoom = (props: ImageProps & ZoomProps) => {
       )}
     </div>
   );
-};
+});

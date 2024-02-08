@@ -15,18 +15,36 @@ const TableCaption = ({ children, ...tableCaptionProps }: TableCationProps) => (
 
 interface TableSectionProps extends React.HTMLAttributes<HTMLTableSectionElement> {
   children: React.ReactNode;
+  ref?: React.Ref<HTMLTableSectionElement>;
 }
 
-const TableHead = ({ children, ...tableHeadProps }: TableSectionProps) => <thead {...tableHeadProps}>{children}</thead>;
+const TableHead = ({ children, ref, ...tableHeadProps }: TableSectionProps) => (
+  <thead ref={ref} {...tableHeadProps}>
+    {children}
+  </thead>
+);
 
-const TableBody = ({ children, ...tableBodyProps }: TableSectionProps) => <tbody {...tableBodyProps}>{children}</tbody>;
+const TableBody = ({ children, ref, ...tableBodyProps }: TableSectionProps) => (
+  <tbody ref={ref} {...tableBodyProps}>
+    {children}
+  </tbody>
+);
 
-const TableFoot = ({ children, ...tableFootProps }: TableSectionProps) => <tfoot {...tableFootProps}>{children}</tfoot>;
+const TableFoot = ({ children, ref, ...tableFootProps }: TableSectionProps) => (
+  <tfoot ref={ref} {...tableFootProps}>
+    {children}
+  </tfoot>
+);
 
 interface TableRowProps extends React.HTMLAttributes<HTMLTableRowElement> {
   children: React.ReactNode;
+  ref?: React.RefObject<HTMLTableRowElement>;
 }
-const TableRow = ({ children, ...tableRowProps }: TableRowProps) => <tr {...tableRowProps}>{children}</tr>;
+const TableRow = ({ children, ref, ...tableRowProps }: TableRowProps) => (
+  <tr ref={ref} {...tableRowProps}>
+    {children}
+  </tr>
+);
 
 interface TableHeaderProps extends React.HTMLAttributes<HTMLTableHeaderCellElement> {
   children: React.ReactNode;
@@ -43,6 +61,7 @@ interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
   colorScheme?: ColorScheme;
   variant?: TableVariants;
   align?: 'left' | 'center' | 'right';
+  ref?: React.Ref<HTMLTableElement>;
 }
 
 export const Table = ({
@@ -50,13 +69,14 @@ export const Table = ({
   variant = 'simple',
   align = 'left',
   children,
+  ref,
   ...tableProps
 }: TableProps) => {
   const tableStyle = createTableStyle(colorScheme, variant);
   const tableAlignStyle = createTableTextAlignStyle(align);
   return (
     <TableContainer>
-      <table css={[tableStyle, tableAlignStyle]} {...tableProps}>
+      <table css={[tableStyle, tableAlignStyle]} {...tableProps} ref={ref}>
         {children}
       </table>
     </TableContainer>

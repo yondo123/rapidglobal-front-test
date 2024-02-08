@@ -20,19 +20,3 @@ export type ProductSort = {
   titleSort: SortAction;
   uploadedAtSort: SortAction;
 };
-
-export type RequestProductUpdateParams = {
-  id: number;
-  title: string;
-};
-
-export type RequestProductsParams = {
-  skip: number;
-  take: number;
-  sortList?: SortList;
-};
-
-export type ResponseProducts = {
-  products: Product[];
-  totalCount: number;
-};

@@ -1,8 +1,9 @@
 'use client';
 
+import { useState } from 'react';
 import { Button, Table, Text, Modal } from '@layouts/components';
 import { formatDateYYYYMMDD, formatCommaNumber } from '@shared/utils';
-import { useState } from 'react';
+import { useModal } from '@layouts/hooks/useModal';
 import { useProductSort } from '../hooks/useProductSort';
 import { ProductDetail } from './ProductDetail';
 import { ProductTableHeader } from './ProductTableHeader';
@@ -16,6 +17,7 @@ interface ProductTableProps {
 }
 
 export const ProductTable = ({ currentPage }: ProductTableProps) => {
+  // const { isOpen, onOpenModal, onCloseModal } = useModal();
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const productSort = useProductSort();

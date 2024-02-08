@@ -1,5 +1,5 @@
 import { generateUrlParams, httpGet } from '@shared/utils/httpRequest';
-import type { RequestProductsParams, ResponseProducts } from '@product/types';
+import { RequestProductsParams, ResponseProducts } from './models/product';
 
 export const getProducts = async ({ skip, take, sortList }: RequestProductsParams): Promise<ResponseProducts> => {
   const query = generateUrlParams({
